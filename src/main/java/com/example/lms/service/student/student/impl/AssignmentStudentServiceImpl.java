@@ -65,4 +65,23 @@ public class AssignmentStudentServiceImpl implements AssignmentStudentService {
             return res;
         }).collect(Collectors.toList());
     }
+
+    @Service
+    public class FileStorageServiceImpl implements FileStorageService {
+
+        private final String uploadDir = "uploads";
+
+        @Override
+        public String store(MultipartFile file) {
+            try {
+                Files.createDirectories(Paths.get(uploadDir));
+                String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir).resolve(filename);
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                return "/files/" + filename; // URL giả định
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store file", e);
+            }
+        }
+    }
 }
