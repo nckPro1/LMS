@@ -2,6 +2,7 @@ package com.example.lms.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.sql.ast.tree.update.Assignment;
 
 import java.time.LocalDateTime;
 
