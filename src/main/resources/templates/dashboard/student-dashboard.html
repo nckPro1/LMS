@@ -1,0 +1,43 @@
+<!-- templates/dashboard/student-dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Chào mừng bạn đến với Dashboard Học viên</h2>
+
+<section>
+    <h3>📈 Tiến độ học tập</h3>
+    <div>
+        <progress th:value="${dashboard.progress}" max="100"></progress>
+        <span th:text="${dashboard.progress} + '%'"></span>
+    </div>
+</section>
+
+<section>
+    <h3>📅 Bài tập sắp đến hạn</h3>
+    <ul>
+        <li th:each="a : ${dashboard.upcomingAssignments}">
+            <strong th:text="${a.title}"></strong> –
+            <span th:text="${a.description}"></span> (Hạn:
+            <span th:text="${#dates.format(a.dueDate, 'dd/MM/yyyy')}"></span>)
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h3>🔔 Thông báo</h3>
+    <ul>
+        <li th:each="n : ${dashboard.notifications}">
+            <span th:text="${n.content}"></span>
+        </li>
+    </ul>
+</section>
+
+<div th:if="${dashboard.allowSendApplication}">
+    <button>📤 Gửi đơn hỗ trợ</button>
+</div>
+</body>
+</html>

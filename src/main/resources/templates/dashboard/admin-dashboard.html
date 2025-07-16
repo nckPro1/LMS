@@ -1,0 +1,44 @@
+<!-- templates/dashboard/admin-dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h2>Dashboard Quản trị viên</h2>
+
+<section>
+    <h3>📊 Thống kê hệ thống</h3>
+    <ul>
+        <li>Sinh viên: <span th:text="${dashboard.totalStudents}"></span></li>
+        <li>Giảng viên: <span th:text="${dashboard.totalTeachers}"></span></li>
+        <li>Admin: <span th:text="${dashboard.totalAdmins}"></span></li>
+        <li>Khoá học: <span th:text="${dashboard.totalCourses}"></span></li>
+        <li>Lớp học: <span th:text="${dashboard.totalClasses}"></span></li>
+    </ul>
+</section>
+
+<section>
+    <h3>🧑‍💼 Tài khoản thay đổi gần đây</h3>
+    <ul>
+        <li th:each="u : ${dashboard.recentUserChanges}">
+            <strong th:text="${u.fullName}"></strong> –
+            <span th:text="${u.role}"></span> –
+            <em th:text="${u.status}"></em> (
+            <span th:text="${#dates.format(u.timestamp, 'dd/MM/yyyy HH:mm')}"></span>)
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h3>🕵️‍♂️ Lịch sử hoạt động</h3>
+    <ul>
+        <li th:each="a : ${dashboard.recentActivities}">
+            <strong th:text="${a.performedBy}"></strong> –
+            <span th:text="${a.action}"></span> (
+            <span th:text="${#dates.format(a.time, 'dd/MM/yyyy HH:mm')}"></span>)
+        </li>
+    </ul>
+</section>
+</body>
+</html>

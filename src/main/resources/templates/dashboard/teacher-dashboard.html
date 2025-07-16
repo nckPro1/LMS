@@ -1,0 +1,47 @@
+<!-- templates/dashboard/teacher-dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+<h2>Dashboard Giảng viên</h2>
+
+<section>
+    <h3>📊 Tổng quan</h3>
+    <p>Lớp đang dạy: <span th:text="${dashboard.totalClasses}"></span></p>
+    <p>Bài tập đã giao: <span th:text="${dashboard.totalAssignments}"></span></p>
+</section>
+
+<section>
+    <h3>📘 Tiến độ các lớp</h3>
+    <ul>
+        <li th:each="cls : ${dashboard.classProgress}">
+            <strong th:text="${cls.className}"></strong>:
+            <span th:text="${cls.avgProgressPercent + '%'}"></span>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h3>🚨 Học sinh tiến độ yếu</h3>
+    <ul>
+        <li th:each="s : ${dashboard.lowPerformingStudents}">
+            <span th:text="${s.studentName}"></span> -
+            <span th:text="${s.className}"></span>:
+            <strong th:text="${s.progressPercent + '%'}"></strong>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h3>📝 Bài tập chưa chấm</h3>
+    <ul>
+        <li th:each="a : ${dashboard.pendingAssignments}">
+            <strong th:text="${a.title}"></strong> –
+            <span th:text="${a.description}"></span>
+        </li>
+    </ul>
+</section>
+</body>
+</html>
