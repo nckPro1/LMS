@@ -1,4 +1,4 @@
-package com.example.lms.service.student.impl;
+package com.example.lms.service.student.student.impl;
 
 import com.example.lms.dto.assignment.AssignmentSubmissionRequest;
 import com.example.lms.dto.assignment.AssignmentSubmissionResponse;
